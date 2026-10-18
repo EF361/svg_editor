@@ -1,101 +1,108 @@
-# SVG Editor  
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)  
-[![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)  
-[![Build Status](https://img.shields.io/badge/Status-Prototype-orange)]()  
-[![CLI Tool](https://img.shields.io/badge/CLI-Supported-lightgrey)]()  
+# SVG Editor ![Python](https://img.shields.io/badge/Python-3.9%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Status](https://img.shields.io/badge/Status-Prototype-orange)
 
-## Executive Summary  
-**SVG Editor** is a secure and extensible Python-based toolkit for transforming and editing SVG files. It provides robust CLI and GUI support for scalable transformations, styling, and sanitization while adhering to the highest security and performance standards.
-
-## Key Features  
-- **Security-First Parsing**: Configures `lxml` to disable entity resolution, DTD loading, and oversized-tree parsing.  
-- **SVG Sanitization**: Strips or neutralizes potentially dangerous elements (e.g., `<script>`, event handlers, `foreignObject`).  
-- **Transformations via Matrix Composition**: Implements flexible affine transformations, supporting nested transforms, arcs, and scaling issues.  
-- **Namespace and ViewBox Handling**: Properly manages SVG namespaces and delves into precise behavior of `viewBox`.  
-- **Golden Rendering Comparisons**: Ensures output consistency by validating SVG renderings against golden files.  
-- **Comprehensive CLI**: Batch process SVG files with chainable transformations directly from the command line.  
-- **Lightweight Dependency Footprint**: Transitioning from `SciPy` to custom affine matrix operations for enhanced efficiency.  
-- **Testing and Validation**: Property-based testing, parser fuzzing, and numerical precision validation to ensure robust handling of edge cases.  
+## Executive Summary
+`svg_editor` is a Python-based tool designed to process, sanitize, and transform SVG files with efficient, secure, and precise handling of affine matrix operations, XML parsing, and rendering tests. The project addresses critical security and functionality challenges in SVG manipulation, offering a robust platform for developers and creators working with scalable vector graphics.
 
 ---
 
-## Architecture & Workflow  
+## Key Features
+
+### Implemented
+- **Secure XML Parsing**: Hardened against adversarial and oversized inputs using `lxml` with an allowlist sanitizer.
+- **Active Content Removal**: Ensures safety by blocking URL-bearing attributes, CSS, external references, and data URLs.
+- **Affine Matrix Transformations**: Custom model with property tests for composition, inversion, and nested groups.
+- **Rendering Validation**: Golden-image generation and cross-platform regression testing with defined precision tolerances.
+- **CLI Tool**: Interactive and scriptable interface for SVG transformations.
+- **Fuzz Testing**: Automated parser fuzzing within time and memory limits to detect edge cases.
+
+### Experimental
+- **ViewBox Semantics**: Enhanced handling of scaling and coordinate transformations.
+- **Arcs and Curves Precision**: Testing precision tolerances for complex path elements.
+- **Reproducible Rendering Engine**: Early modeling of platform-agnostic rendering policies.
+
+### Planned
+- **Deep Namespace Handling**: Improved support for custom namespaces in SVG files.
+- **Extended Testing**: Adversarial examples with deeply nested elements and extreme scenarios.
+- **Interactive GUI**: Tkinter-based graphical interface for more accessible SVG editing.
+
+---
+
+## Architecture & Workflow
+
 ```mermaid
-graph TD
-    A[Input SVG File] -->|Sanitize| B[Parser Module]
-    B -->|Namespace Handling| C[Transformation Engine]
-    C -->|Matrix Composition| D[Rendering Validator]
-    D -->|Golden File Comparison| E[Output SVG File]
-    B -->|Security Filters| X[Restricted External Access]
-    C -->|Numeric Precision Adjustments| F[Optimized Transformations]
+flowchart TD
+    A["Start: Accept SVG Input"] -->|"Parse and Sanitize"| B["XML Hardening"]
+    B -->|"Validate Structure"| C["Namespace & Attribute Check"]
+    C -->|"Transform Elements"| D["Affine Transform Engine"]
+    D -->|"Apply Rendering Rules"| E["Golden-Image Validation"]
+    E -->|"Output Processed SVG"| F["Save or Export"]
+    F -->|"End"| G["Workflow Complete"]
 ```
 
-### Workflow Breakdown
-1. **Input SVG File**: Accept external SVG files via CLI or GUI.  
-2. **Parser Module**: Sanitize and parse SVG input with `lxml` using secure configurations.  
-3. **Transformation Engine**: Apply affine transformations via matrix composition.  
-4. **Rendering Validator**: Compare final output against golden rendering files.  
-5. **Output SVG File**: Safely export optimized and sanitized SVG.
+---
+
+## Tech Stack & Tools Breakdown
+
+- **Language**: Python 3.9+
+- **Libraries**:
+  - `lxml` for XML parsing and sanitization
+  - Custom affine matrix operations for geometrical transformations
+  - Tkinter (planned) for GUI-based editing
+- **Testing**:
+  - Property-based testing to validate affine matrix composition and nested effects
+  - Fuzz testing for XML parser robustness
+  - Golden-image testing for rendering accuracy across platforms
+- **Command-Line Interface**:
+  - Built-in CLI for interactive or batch SVG processing
 
 ---
 
-## Tech Stack & Tools  
-- **Programming Language**: Python 3.9+  
-- **Libraries**:  
-  - `lxml` for secure XML/SVG parsing.  
-  - `Tkinter` for GUI rendering components.  
-  - Custom affine transformation logic (transitioning away from `SciPy`).  
-- **Testing**: Parser fuzzing, property-based tests, and rendering validations.  
+## Quickstart / Installation
 
----
+### Prerequisites
+- Python 3.9 or later
+- `pip` package manager
 
-## Quickstart / Installation  
-
-### Prerequisites  
-- Python 3.9 or later installed on your system.  
-
-### Installation  
+### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/username/svg_editor.git
+git clone https://github.com/EF361/svg_editor.git
 cd svg_editor
 
-# Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+# Set up a virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-### Basic Usage: CLI  
+### Usage
 ```bash
-# Syntax: svg_editor.py --input <input_file> --output <output_file> --transform <transformation>
-python svg_editor.py --input example.svg --output output.svg --transform rotate(45)
+# Display help
+python svg_editor.py --help
+
+# Process an SVG file
+python svg_editor.py --input "example.svg" --output "output.svg" --transform "scale=2,rotate=45"
+
+# Run tests
+pytest tests/
 ```
 
-### Basic Usage: GUI  
-```bash
-python svg_editor.py --gui
-```
+---
+
+## Contribution Guidelines
+We welcome contributions! Please adhere to the following:
+1. Fork the repository and create a feature branch.
+2. Ensure all tests pass locally before submitting a pull request.
+3. Document your changes in both code comments and the README if applicable.
 
 ---
 
-## Planned Features  
-- Native support for SVG animations.  
-- Support for advanced styling operations.  
-- Cloud-based integration for large-scale batch processing.  
-- Optimized libraries for even larger SVG datasets.  
+## License
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
 
 ---
 
-## Contributing  
-We welcome contributions! Please review our [Contribution Guidelines](./CONTRIBUTING.md) and submit a pull request.  
-
----
-
-## License  
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.  
-
---- 
-_Project maintained by Alicia Goh (EF361), Senior Software Engineer._
+## About
+Developed by **Alicia Goh (EF361)**, this SVG editor demonstrates expertise in Python development, secure XML handling, and end-to-end software testing. Contributions and feedback are warmly welcomed!
