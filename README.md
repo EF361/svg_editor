@@ -1,89 +1,75 @@
-# SVG Editor & Optimizer ![Python](https://img.shields.io/badge/Python-v3.8%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Contributions](https://img.shields.io/badge/Contributions-Welcome-orange)
+# SVG Editor ![GitHub repo size](https://img.shields.io/github/repo-size/EF361/svg_editor?style=flat-square) ![Python](https://img.shields.io/badge/Python-3.9+-blue?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square) ![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=flat-square)
+
+## Executive Summary
+**SVG Editor** is a lightweight and efficient Python-based suite designed to streamline SVG file manipulation. By combining powerful libraries like `lxml` and `SciPy`, it offers developers innovative tools for SVG optimization while enabling extensibility for broader accessibility.
 
 ---
 
-## 🚀 Transforming SVG Graphics into Seamless Visual Perfection  
-Welcome to **SVG Editor & Optimizer**, an advanced Python-based tool designed to streamline your SVG editing and optimization tasks. Whether you're a designer, developer, or automation enthusiast, this tool eliminates manual editing, drastically reduces file size, and improves load performance—all with minimal effort.
-
-With **SVG Editor**, enhancements, manipulation, and optimizations become easy, saving you time and making your vector graphics production more efficient.
-
----
-
-## 🌟 Business Value  
-Do you ever find your webpages slowing down due to bulky SVG files or struggle with manually modifying vectors? This tool solves that. Just upload your raw SVG files, and in seconds, it:  
-1. **Optimizes File Size** without compromising quality.  
-2. Allows **Automated Edits** like color changes, resizing, layering, or path manipulation.  
-3. **Enhances UX** with faster page rendering by optimizing the SVG's geometry and data structure.
-
-This tool automates tedious editing tasks, so you can focus on what really matters—delivering high-quality visuals.
+## Key Features
+- **Efficient SVG optimization:** Analyze and reduce file size without compromising visual quality.
+- **Advanced parsing with `lxml`:** Seamless parsing and manipulation of complex XML-based SVG files.
+- **Geometric transformations:** Leverage `SciPy` for precise scaling, rotation, and coordinate transformations.
+- **Customizability:** Modular functions for tailored SVG operations.
+- **Future-Ready:** Plans for a **Graphical User Interface (GUI)**, enhancing usability and adoption potential.
 
 ---
 
-## 🛠️ Tech Stack  
-| **Technology**        | **Purpose**                                  |  
-|------------------------|----------------------------------------------|  
-| **Python 3.8+**       | Core programming language                    |  
-| **lxml**              | For XML structure parsing and editing        |  
-| **Cairosvg**          | Rendering SVG files with precise conversions |  
-| **SciPy**             | Geometric optimizations and transformations   |  
+## Architecture & Workflow
+
+Below is a high-level overview of the system's existing architecture and planned GUI implementation:
+
+```mermaid
+graph TD
+    A[User] -->|Upload/Edit SVG| B[CLI or GUI]
+    B --> C[Core Logic: lxml-based Parsing]
+    C --> D[SciPy Transformation Layer]
+    D --> E[SVG Optimization]
+    E --> F[Export Final SVG File]
+    F -->|Optional| G[GUI Preview]
+```
 
 ---
 
-## 🔍 How It Works  
-**SVG Editor & Optimizer** leverages Python's robust libraries to process SVG data effectively. Here's a high-level flow:  
-1. **Input SVG File**: Load any complex or simple SVG file into the tool.  
-2. **Parsing**: The system parses the SVG structure using `lxml`.  
-3. **Automated Edits**: Define transformations like color adjustments, rotation, scaling, or grouping.  
-4. **Optimization**: Excess data is stripped, paths are simplified, and file size is reduced.  
-5. **Export**: The optimized and edited SVG gets exported, ready for use in your projects.
+## Tech Stack & Tools Breakdown
+| Technology/Tool | Purpose                                   |
+|------------------|-------------------------------------------|
+| **Python**       | Primary programming language             |
+| **lxml**         | Fast and threaded XML parsing            |
+| **SciPy**        | Advanced geometric manipulation routines |
+| **shields.io**   | Dynamic status and project badges        |
+| **Tkinter (Planned)** | Intuitive graphical interface library |
 
 ---
 
-## 📖 Tutorials & Demo  
+## Quickstart / Installation
 
-### 1. Basic Setup  
-**Step 1:** Clone the Repository  
-```bash  
-git clone https://github.com/EF361/svg_editor.git  
-cd svg_editor  
-```  
+Follow these steps to get started with **SVG Editor**:
 
-**Step 2:** Install Dependencies  
-```bash  
-pip install -r requirements.txt  
-```  
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/EF361/svg_editor.git
+   cd svg_editor
+   ```
 
-**Step 3:** Run the Editor  
-```bash  
-python svg_editor.py -i input_file.svg -o output_file.svg  
-```  
+2. **Set up a virtual environment** (recommended):
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate   # On Windows: venv\Scripts\activate
+   ```
 
-**Step 4:** Customize It!  
-Use the available CLI options to configure your edits. For example:  
-```bash  
-python svg_editor.py --resize 50x50 --color #FF5733 input_file.svg  
-```  
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
----  
+4. **Run the CLI tool** to edit or optimize your SVG:
+   ```bash
+   python main.py --help
+   ```
 
-### 2. Video Demonstration  
-
-👉 Watch the complete walkthrough [here](https://example.com/demo-video).  
-This demo showcases:  
-1. Loading SVGs for automated edits.  
-2. Optimizing sample files for cross-platform use.  
-3. Advanced commands for professional-grade SVG editing.  
+5. (**Coming Soon**) **GUI Mode**:
+   The upcoming GUI would supplement CLI functionality, offering an intuitive canvas for file editing.
 
 ---
 
-## 🤝 Contributing  
-Contributions are welcome! Check the `CONTRIBUTING.md` for detailed guidelines. If you encounter bugs or want to request new features, submit an issue via [GitHub Issues](https://github.com/EF361/svg_editor/issues).  
-
----
-
-## 📜 License  
-This project is licensed under the MIT License. See the `LICENSE` file for full text.  
-
----
-
-**Optimize your graphics. Simplify your workflow. Empower your creativity.**
+Invest your time into **SVG Editor** to streamline your SVG workflow while scaling your projects with ease and efficiency. 🚀 Contributions and feedback welcome—let's evolve this project together!
